@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,12 +21,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Sel;
+import model.Tempat;
 
 /**
  *
  * @author user only
  */
 public class GameFrame extends JFrame {
+
     private TempatPanel tempatPanel;
 
     private JLabel perintahlabel;
@@ -51,6 +54,7 @@ public class GameFrame extends JFrame {
     public void init() {
         // set ukuran dan layout
         this.setSize(500, 300);
+
         this.setLayout(new BorderLayout());
 
         // set menu Bar
@@ -71,10 +75,31 @@ public class GameFrame extends JFrame {
             }
         }
         );
+        bacaKonfigurasiMenuItem.addActionListener((ActionEvent ae) -> {
+            JFileChooser jf = new JFileChooser();
+            int returnVal = jf.showOpenDialog(null);
+            Tempat tempat = new Tempat();
+            
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                tempat.bacaKonfigurasi(jf.getSelectedFile());
+                // jika klik item baca maka akan masuk ke file tersebut
+                
+            }
+            Tempat.batasBawah = 500;
+            Tempat.batasKanan = 300;
+            tempatPanel = new TempatPanel(tempat);// untuk membaca grafik x dan y
+            tempatPanel.setTempat(tempat);
+            init();
+            // membaca ul
+        } // jika mengecklik baca dan membuka JFile chooser
+        );
 
         // panel selatan
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new FlowLayout());
+//        tempatPanel = new TempatPanel();
+//        this.add(tempatPanel, BorderLayout.CENTER);
+//        tempatPanel.setVisible(true);
 
         this.perintahlabel = new JLabel("Perintah");
         southPanel.add(perintahlabel);

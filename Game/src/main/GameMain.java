@@ -6,7 +6,6 @@
 package main;
 
 import view.GameFrame;
-import view.TempatPanel;
 
 /**
  *

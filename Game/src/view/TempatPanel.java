@@ -29,7 +29,7 @@ public class TempatPanel extends JPanel {
     }
 
     /**
-     * Fungsi untuk menggambar di panel
+     * Fungsi untuk menggambar di panel untuk membuat peta dan memberi warna
      *
      * @param g
      */
@@ -43,19 +43,11 @@ public class TempatPanel extends JPanel {
         if (tempat != null) {
             for (int i = 0; i < tempat.getDaftarSel().size(); i++) {
                 Sel sel = tempat.getDaftarSel().get(i);
-                if (sel.getNilai() == '@') {
-                    g.setColor(sel.getWarna());
-                    g.fillRect(sel.getPosisiX(),
-                            sel.getPosisiY(),
-                            sel.getLebar(),
-                            sel.getTinggi());
-                } else {
-                    g.setColor(sel.getWarna());
-                    g.fillOval(sel.getPosisiX(),
-                            sel.getPosisiY(),
-                            sel.getLebar(),
-                            sel.getTinggi());
-                }
+                g.setColor(sel.getWarna());
+                g.fillOval(sel.getPosisiY() * sel.getLebar(),
+                        sel.getPosisiX() * sel.getTinggi(),
+                        sel.getLebar(),
+                        sel.getTinggi());
             }
         }
     }
